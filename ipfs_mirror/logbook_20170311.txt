@@ -1,0 +1,43 @@
+*----------------------------------*
+| Logbook Entry 2017/03/11 - 01:19 |
+*----------------------------------*
+
+This is a short post that documents the steps undertaken and what is currently
+working/not working and how you can replicate it yourself.
+It also gets a few issues for future work.
+
+Interested? Try it out and report back!
+This is new, this hasn't been done before.
+
+Test: ran IPFS import with ipfs 0.4.6
+Results: success
+Notes:
+sometimes S3 behaves in a weird way (numerous backed-off-in-time GETs result
+in 4/500) and the import needs to be restarted (monitor the logs using
+journalctl or execute the script in a shell)
+
+Test: pinned one whole release to another node (v4, internet, no VPN)
+Results: success
+Notes:
+used /ipfs/QmYkFXj6fV9oQtZVZALiq7ASUBnxD5ARJjMYAuTAKyvdK9
+
+the bitswap algorithm of IPFS announces all hashes right after
+the pin of that block has been completed.
+If you have plenty of TX-bandwidth available and maintain a lot
+of swarm connections (400+ is not uncommon these days), the TX
+bandwidth will be filled with new announces to the DHT.
+
+This creates IO and CPU load which makes IPFS unusable on limited.
+That affects most virtualized platforms.
+
+Summary of this:
+IPFS still not usable for production when using p2p to exchange
+blocks while pinning.
+
+Things to do/try:
+
+* wait until IPFS works
+* fix IPFS (@whyrusleeping is aware of these things)
+* try something else (some thoughts: https://github.com/NixIPFS/notes/issues/2)
+
+-- @mguentner // code at sourcediver.org

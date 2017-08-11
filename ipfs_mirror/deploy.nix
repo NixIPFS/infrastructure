@@ -3,25 +3,12 @@
     nixipfs-scripts = import (pkgs.fetchFromGitHub {
       owner = "nixipfs";
       repo = "nixipfs-scripts";
-      rev = "e3b786503a51b190333d5dbca90a196b488fda5f";
-      sha256 = "13y5w2qa4838p1qr856qpkihkvps55hq05svh99m2hx66rn66dq6";
+      rev = "e45187b0f2cbf78b6cd36aec10557ce5f9f03266";
+      sha256 = "060jx1aldi4j0a8xakf801r8hp45lm384id4csibk48ybri23jws";
     }) { inherit pkgs; };
   in {
     deployment.targetEnv = "container";
     #deployment.container.host = "your.host.if.not.localhost";
-
-    nixpkgs.config.packageOverrides = pkgs: {
-      # generate_programs_index only builds with an old nixUnstable
-      nixUnstable = pkgs.nixUnstable.overrideDerivation (oldAttrs: {
-        name = "nix-1.12pre4997_1351b0d";
-        src = pkgs.fetchFromGitHub {
-          owner = "NixOS";
-          repo = "nix";
-          rev = "1351b0df87a0984914769c5dc76489618b3a3fec";
-          sha256 = "09zvphzik9pypi1bnjs0v83qwgl5cfb5w0c788jlr5wbd8x3crv1";
-        };
-      });
-    };
 
     environment.systemPackages = [ pkgs.ipfs pkgs.tmux pkgs.iftop pkgs.atop ];
     users.extraUsers.nixipfs = { home = "/srv"; group = "nixipfs"; };
@@ -57,12 +44,14 @@
                   {
                     "channel": "nixos-17.03-small",
                     "project": "nixos",
-                    "jobset": "release-17.03-small"
+                    "jobset": "release-17.03-small",
+                    "keep": 7
                   },
                   {
                     "channel": "nixos-17.03",
                     "project": "nixos",
-                    "jobset": "release-17.03"
+                    "jobset": "release-17.03",
+                    "keep": 7
                   }
                 ]
               }
@@ -75,3 +64,4 @@
       };
   };
 }
+ 

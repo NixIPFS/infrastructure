@@ -3,8 +3,8 @@
     nixipfs-scripts = import (pkgs.fetchFromGitHub {
       owner = "nixipfs";
       repo = "nixipfs-scripts";
-      rev = "e45187b0f2cbf78b6cd36aec10557ce5f9f03266";
-      sha256 = "060jx1aldi4j0a8xakf801r8hp45lm384id4csibk48ybri23jws";
+      rev = "4021e7db8436625122e388d0c5d6cc5d30a13309";
+      sha256 = "1fqaq7k1q4f55q7rd2dlyxjm8dv4r4675dnqmywydddlvnmrmlkk";
     }) { inherit pkgs; };
   in {
     deployment.targetEnv = "container";
